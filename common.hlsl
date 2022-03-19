@@ -42,7 +42,7 @@ struct LIGHT
 	float4 Direction;
 	float4 Diffuse;
 	float4 Ambient;
-	float3 Position;
+	float4 Position;
 	float4 Angle;
 
 	matrix View;

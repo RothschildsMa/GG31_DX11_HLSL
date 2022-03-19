@@ -118,7 +118,7 @@ void Manager::Draw()
 {
 	LightManager::GetInstance().Draw();
 	//m_Scene->ShadowObjDraw();
-	Field* field = m_Scene->GetGameObject<Field>(1);
+	MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	//MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	ShaderSample* sample = m_Scene->GetGameObject<ShaderSample>(1);
 	field->Draw();

@@ -50,7 +50,7 @@ struct LIGHT
 	XMVECTOR	Direction;
 	XMFLOAT4	Diffuse;
 	XMFLOAT4	Ambient;
-	XMFLOAT3	Position;
+	XMFLOAT4	Position;
 	XMFLOAT4	Angle;
 
 	XMMATRIX	ViewMatrix;

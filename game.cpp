@@ -58,10 +58,10 @@ void Game::Init()
 	Fade::GetInstance().Fade_Start(FadeMode::FADE_IN, 0.0f, 0.0f, 0.0f, 60);
 
 	AddGameObject<Camera>(0);
-	//AddGameObject<SpotLight>(0);
-	//AddGameObject<Skybox>(1);
-	AddGameObject<Field>(1);
-	//AddGameObject<MeshField>(1);
+	AddGameObject<SpotLight>(0);
+	AddGameObject<Skybox>(1);
+	//AddGameObject<Field>(1);
+	AddGameObject<MeshField>(1);
 	AddGameObject<ShaderSample>(1);
 
 	AddGameObject<Polygon2D>(2);
