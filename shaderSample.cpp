@@ -14,8 +14,20 @@
 #include <string>
 
 static const char* buff = "";
-static bool flag[7];
+static bool g_Flag[ShaderTypeMax];
 static bool fieldFlag[2];
+static std::string g_TypeName[] = {
+	"unLit",
+	"unLitTexture",
+	"vertexLighting",
+	"pixelLightingPhone",
+	"blinnPhong",
+	"rimLighting",
+	"SpotLight",
+	"depthShadow",
+};
+
+static const int g_TypeCnt = ARRAYSIZE(g_TypeName);
 
 void ShaderSample::Init()
 {
@@ -32,7 +44,7 @@ void ShaderSample::Init()
 
 	m_Quaternion = XMQuaternionIdentity();
 
-	m_Type = 6;
+	
 
 	m_Sphere = scene->AddGameObject<SphereDebugDraw>(1);
 	m_Sphere->SetRadius(1.5f);
@@ -68,12 +80,20 @@ void ShaderSample::Init()
 
 	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[6], "pixelLightingSpotPS.cso");
 
+	Renderer::GetInstance().CreateVertexShader(&m_VertexShader[7], &m_VertexLayout[7], "depthShadowMappingVS.cso");
+
+	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[7], "depthShadowMappingPS.cso");
+
 	/*for (int i = 0; i < 6; i++)
 	{
 		flag[i] = false;
 	}*/
 	//flag[6] = true;
+
 	fieldFlag[0] = true;
+	
+	g_Flag[0] = true;
+
 	m_Parameter.x = 3.14159f * 0.5f;
 }
 
@@ -82,7 +102,7 @@ void ShaderSample::Uninit()
 	m_Model->Unload();
 	delete m_Model;
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < ShaderTypeMax; i++)
 	{
 		if (m_VertexLayout[i]) m_VertexLayout[i]->Release();
 		if (m_VertexShader[i]) m_VertexShader[i]->Release();
@@ -153,7 +173,7 @@ void ShaderSample::Update()
 
 	MeshField* meshField = scene->GetGameObject<MeshField>(1);
 
-	m_Position.y = meshField->GetHeight(m_Position) + 1.2f;
+	m_Position.y = meshField->GetHeight(m_Position) + 5.0f; //1.2f
 
 	{
 		//window描画
@@ -178,94 +198,27 @@ void ShaderSample::Update()
 				ImGui::TreePop();
 			}
 
+			//shaderTypeの切り替え...checkBoxで操作する
 			if (ImGui::TreeNode("ShaderType"))
 			{
-
 				ImGui::BeginChild("Scrolling");
 
-				if (ImGui::Checkbox("unLit", &flag[0]))
+				for (int i = 0; i < ShaderTypeMax; i++)
 				{
-					m_Type = 0;
-					for (int i = 0; i < 7; i++)
+					if (ImGui::Checkbox(g_TypeName[i].c_str(), &g_Flag[i]))
 					{
-						if (i == 0) continue;
-
-						flag[i] = false;
+						m_Type = i;
+						for (int j = 0; j < ShaderTypeMax; j++)
+						{
+							if (j == m_Type) continue;
+							g_Flag[j] = false;
+						}
 
 					}
-				}
-				if (ImGui::Checkbox("unLitTexture", &flag[1]))
-				{
-					m_Type = 1;
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 1) continue;
 
-						flag[i] = false;
-
-					}
-				}
-				if (ImGui::Checkbox("vertexLighting", &flag[2]))
-				{
-					m_Type = 2;
-
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 2) continue;
-
-						flag[i] = false;
-
-					}
 				}
 
-				if (ImGui::Checkbox("pixelLightingPhone", &flag[3]))
-				{
-					m_Type = 3;
 
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 3) continue;
-
-						flag[i] = false;
-
-					}
-				}
-				if (ImGui::Checkbox("blinnPhong", &flag[4]))
-				{
-					m_Type = 4;
-
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 4) continue;
-
-						flag[i] = false;
-
-					}
-				}
-				if (ImGui::Checkbox("rimLighting", &flag[5]))
-				{
-					m_Type = 5;
-
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 5) continue;
-
-						flag[i] = false;
-
-					}
-				}
-				if (ImGui::Checkbox("SpotLight", &flag[6]))
-				{
-					m_Type = 6;
-
-					for (int i = 0; i < 7; i++)
-					{
-						if (i == 6) continue;
-
-						flag[i] = false;
-
-					}
-				}
 				ImGui::EndChild();
 				ImGui::TreePop();
 			}
@@ -347,6 +300,10 @@ void ShaderSample::Draw()
 	m_WorldMtx = m_ScaleMtx * mat * m_RotMtx  * m_TransMtx;
 
 	Renderer::GetInstance().SetWorldMatrix(m_WorldMtx);
+
+	//シャドウバッファをセット
+	ID3D11ShaderResourceView* shadowDepthTexture = Renderer::GetInstance().GetShadowDepthTexture();
+	Renderer::GetInstance().GetDeviceContext()->PSSetShaderResources(1, 1, &shadowDepthTexture);
 
 	m_Model->Draw();
 
