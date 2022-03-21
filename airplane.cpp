@@ -8,7 +8,7 @@
 #include "player.h"
 #include "bullet.h"
 #include "hp.h"
-#include "polygon2D.h"
+#include "shadowDepthView.h"
 #include "shadow.h"
 #include "gamePad.h"
 #include "mouse.h"

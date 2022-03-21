@@ -21,7 +21,7 @@
 #include "explosion.h"
 #include "sprite2D.h"
 #include "fade.h"
-#include "polygon2D.h"
+#include "shadowDepthView.h"
 #include "shadow.h"
 #include "audio.h"
 #include "title.h"
@@ -64,7 +64,7 @@ void Game::Init()
 	AddGameObject<MeshField>(1);
 	AddGameObject<ShaderSample>(1);
 
-	AddGameObject<Polygon2D>(2);
+	AddGameObject<ShadowDepthView>(2);
 	/*Player* p1 = AddGameObject<Airplane>(1);
 	p1->SetPosition({ 3.0f,1.0f,3.0f });
 	Player* p2 = AddGameObject<Airplane>(1);

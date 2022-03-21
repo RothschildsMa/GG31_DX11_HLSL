@@ -195,7 +195,7 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="polygon2D.h" />
+    <ClInclude Include="shadowDepthView.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="result.h" />
@@ -247,7 +247,7 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="polygon2D.cpp" />
+    <ClCompile Include="shadowDepthView.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />

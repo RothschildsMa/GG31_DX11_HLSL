@@ -57,9 +57,6 @@
     <ClInclude Include="model.h">
       <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
-    <ClInclude Include="polygon2D.h">
-      <Filter>ソース ファイル\game_object</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>ソース ファイル\system</Filter>
     </ClInclude>
@@ -204,6 +201,9 @@
     <ClInclude Include="lightManager.h">
       <Filter>ソース ファイル\game_object\light</Filter>
     </ClInclude>
+    <ClInclude Include="shadowDepthView.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -213,9 +213,6 @@
       <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
     <ClCompile Include="model.cpp">
-      <Filter>ソース ファイル\game_object</Filter>
-    </ClCompile>
-    <ClCompile Include="polygon2D.cpp">
       <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -352,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="lightManager.cpp">
       <Filter>ソース ファイル\game_object\light</Filter>
+    </ClCompile>
+    <ClCompile Include="shadowDepthView.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

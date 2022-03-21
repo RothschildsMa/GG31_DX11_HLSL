@@ -2,7 +2,7 @@
 
 #include"gameobject.h"
 
-class Polygon2D : public GameObject
+class ShadowDepthView : public GameObject
 {
 private:
 

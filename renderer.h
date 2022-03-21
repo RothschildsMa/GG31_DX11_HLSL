@@ -86,6 +86,8 @@ private:
 	ID3D11Buffer*			m_CameraBuffer = nullptr;
 	ID3D11Buffer*			m_ParameterBuffer = nullptr;
 
+	
+
 	ID3D11DepthStencilState* m_DepthStateEnable = nullptr;
 	ID3D11DepthStencilState* m_DepthStateDisable = nullptr;
 

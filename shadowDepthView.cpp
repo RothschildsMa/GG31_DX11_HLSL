@@ -1,8 +1,8 @@
 #include "main.h"
 #include "renderer.h"
-#include "polygon2D.h"
+#include "shadowDepthView.h"
 
-void Polygon2D::Init()
+void ShadowDepthView::Init()
 {
 	VERTEX_3D vertex[4];
 
@@ -54,7 +54,7 @@ void Polygon2D::Init()
 
 }
 
-void Polygon2D::Uninit()
+void ShadowDepthView::Uninit()
 {
 	m_VertexBuffer->Release();
 	//m_Texture->Release();
@@ -64,12 +64,12 @@ void Polygon2D::Uninit()
 	m_PixelShader->Release();
 }
 
-void Polygon2D::Update()
+void ShadowDepthView::Update()
 {
 
 }
 
-void Polygon2D::Draw()
+void ShadowDepthView::Draw()
 {
 	//入力レイアウト設定
 	Renderer::GetInstance().GetDeviceContext()->IASetInputLayout(m_VertexLayout);
