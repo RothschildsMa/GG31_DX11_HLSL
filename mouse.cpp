@@ -154,7 +154,7 @@ void Mouse::GetRay(XMVECTOR& Near, XMVECTOR& Far)
 	);
 
 	Scene* scene = Manager::GetInstance().GetScene();
-	Camera* camera = scene->GetGameObject<Camera>(0);
+	TPSCamera* camera = scene->GetGameObject<TPSCamera>(0);
 
 	mtxView = camera->GetViewMatrix();
 	mtxProj = camera->GetProjectionMatrix();

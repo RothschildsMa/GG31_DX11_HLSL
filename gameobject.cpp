@@ -39,7 +39,7 @@ XMFLOAT2 GameObject::GetScreenPosition(XMFLOAT3 position)
 	);
 
 	Scene* scene = Manager::GetInstance().GetScene();
-	Camera* camera = scene->GetGameObject<Camera>(0);
+	TPSCamera* camera = scene->GetGameObject<TPSCamera>(0);
 
 	mtxView = camera->GetViewMatrix();
 	mtxProj = camera->GetProjectionMatrix();

@@ -5,6 +5,7 @@
 #include "input.h"
 #include "scene.h"
 #include "model.h"
+#include "camera.h"
 #include "shaderSample.h"
 #include "bullet.h"
 #include "meshField.h"
@@ -44,7 +45,7 @@ void ShaderSample::Init()
 
 	m_Quaternion = XMQuaternionIdentity();
 
-	
+	m_TpsCamera = scene->AddGameObject<TPSCamera>(0);
 
 	m_Sphere = scene->AddGameObject<SphereDebugDraw>(1);
 	m_Sphere->SetRadius(1.5f);
@@ -116,6 +117,8 @@ void ShaderSample::Update()
 {
 	//if (Input::GetKeyPress('Q')) m_Rotation.x -= 0.1f;
 	//if (Input::GetKeyPress('E')) m_Rotation.x += 0.1f;
+
+	m_TpsCamera->SetCameraStick(m_Position, { 0.0f,5.0f,0.0f }, GetForwardVector());
 
 	m_Sphere->SetPosition(m_Position);
 

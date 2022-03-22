@@ -105,7 +105,7 @@ void Tree::Draw()
 
 	//カメラのビューマトリクス取得
 	Scene* scene = Manager::GetInstance().GetScene();
-	Camera* camera = scene->GetGameObject<Camera>(0);
+	TPSCamera* camera = scene->GetGameObject<TPSCamera>(0);
 	XMMATRIX view = camera->GetViewMatrix();
 
 	//ビューの逆行列

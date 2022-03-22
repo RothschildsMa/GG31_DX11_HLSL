@@ -58,7 +58,7 @@ void Game::Init()
 
 	Fade::GetInstance().Fade_Start(FadeMode::FADE_IN, 0.0f, 0.0f, 0.0f, 60);
 
-	AddGameObject<Camera>(0);
+	AddGameObject<DefaultCamera>(0);
 	//AddGameObject<SpotLight>(0);
 	AddGameObject<Skybox>(1);
 	//AddGameObject<Field>(1);

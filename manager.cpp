@@ -120,7 +120,7 @@ void Manager::Draw()
 {
 	LightManager::GetInstance().Draw();
 	//m_Scene->ShadowObjDraw();
-	Camera* camera = m_Scene->GetGameObject<Camera>(0);
+	DefaultCamera* camera = m_Scene->GetGameObject<DefaultCamera>(0);
 	MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	//MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	ShaderSample* sample = m_Scene->GetGameObject<ShaderSample>(1);

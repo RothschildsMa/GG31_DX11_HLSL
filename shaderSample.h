@@ -7,7 +7,7 @@
 class ShaderSample : public GameObject
 {
 private:
-
+	class TPSCamera* m_TpsCamera;
 	class Model* m_Model;
 	class SphereDebugDraw* m_Sphere;
 
