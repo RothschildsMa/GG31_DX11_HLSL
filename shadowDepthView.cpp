@@ -1,6 +1,7 @@
 #include "main.h"
 #include "renderer.h"
 #include "shadowDepthView.h"
+#include "myGui.h"
 
 void ShadowDepthView::Init()
 {
@@ -71,6 +72,8 @@ void ShadowDepthView::Update()
 
 void ShadowDepthView::Draw()
 {
+	if (!MyGui::ShadowDepthView) return;
+
 	//入力レイアウト設定
 	Renderer::GetInstance().GetDeviceContext()->IASetInputLayout(m_VertexLayout);
 
@@ -86,7 +89,7 @@ void ShadowDepthView::Draw()
 	UINT offset = 0;
 	Renderer::GetInstance().GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
-	//テクスチャー設定
+	////テクスチャー設定
 	ID3D11ShaderResourceView* shadowDepthTexture = Renderer::GetInstance().GetShadowDepthTexture();
 	Renderer::GetInstance().GetDeviceContext()->PSSetShaderResources(0, 1, &shadowDepthTexture);
 

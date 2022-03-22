@@ -12,9 +12,14 @@ class MyGui : public Singleton<MyGui>
 {
 private:
 	static float m_Parameter;
+	static bool m_Drawflag;
+
 
 public:
-	MyGui(){}
+	MyGui() {}
+
+	static bool ShadowDepthView;
+	static bool RenderTargetView;
 
 	void Init();
 	void Uninit();
@@ -22,4 +27,5 @@ public:
 	void Draw();
 
 	static float GetParam() { return m_Parameter; }
+	static bool GetDrawFlag() { return m_Drawflag; }
 };

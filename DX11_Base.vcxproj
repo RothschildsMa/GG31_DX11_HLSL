@@ -175,6 +175,7 @@
     <ClInclude Include="debugDraw.h" />
     <ClInclude Include="mouseEvent.h" />
     <ClInclude Include="myGui.h" />
+    <ClInclude Include="renderTexture.h" />
     <ClInclude Include="shaderSample.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="spotLight.h" />
@@ -237,6 +238,7 @@
     <ClCompile Include="mousePicker.cpp" />
     <ClCompile Include="mouseEvent.cpp" />
     <ClCompile Include="myGui.cpp" />
+    <ClCompile Include="renderTexture.cpp" />
     <ClCompile Include="shaderSample.cpp" />
     <ClCompile Include="sphere.cpp" />
     <ClCompile Include="spotLight.cpp" />

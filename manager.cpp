@@ -20,6 +20,8 @@
 #include "shaderSample.h"
 #include "meshField.h"
 #include "field.h"
+#include "camera.h"
+
 
 void Manager::Create()
 {
@@ -118,11 +120,18 @@ void Manager::Draw()
 {
 	LightManager::GetInstance().Draw();
 	//m_Scene->ShadowObjDraw();
+	Camera* camera = m_Scene->GetGameObject<Camera>(0);
 	MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	//MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	ShaderSample* sample = m_Scene->GetGameObject<ShaderSample>(1);
 	field->Draw();
 	sample->Draw();
+
+	Renderer::GetInstance().BeginPP();
+	camera->Draw();
+	field->Draw();
+	sample->Draw();
+	
 
 	Renderer::GetInstance().Begin();
 

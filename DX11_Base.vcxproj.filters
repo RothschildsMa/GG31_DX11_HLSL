@@ -204,6 +204,9 @@
     <ClInclude Include="shadowDepthView.h">
       <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
+    <ClInclude Include="renderTexture.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -351,6 +354,9 @@
       <Filter>ソース ファイル\game_object\light</Filter>
     </ClCompile>
     <ClCompile Include="shadowDepthView.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClCompile>
+    <ClCompile Include="renderTexture.cpp">
       <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
   </ItemGroup>

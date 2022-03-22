@@ -5,6 +5,9 @@
 #include<string>
 
 float MyGui::m_Parameter = 0.0f;
+bool MyGui::m_Drawflag = false;
+bool MyGui::ShadowDepthView = false;
+bool MyGui::RenderTargetView = false;
 
 static char buf[256] = "";
 
@@ -33,7 +36,7 @@ void MyGui::Init()
 	//ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4(0.0f, 10.0f, 10.0f, 1.0f));
 	//ImGui::PushStyleColor(ImGuiCol_TableRowBg, ImVec4(1.0f, 1.0f, 0.0f, 1.0f));
 	m_Parameter = 0.0f;
-
+	m_Drawflag = false;
 
 }
 
@@ -53,30 +56,13 @@ void MyGui::Draw()
 {
 	static int counter = 0;
 	
-
+	ImGui::Begin("Debug");
 	
+	ImGui::Checkbox("ShadowDepthView", &ShadowDepthView);
+	ImGui::Checkbox("RenderTargetView", &RenderTargetView);
 
-	//ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
 
-	//if (ImGui::BeginMenuBar())
-	//{
-	//	if (ImGui::BeginMenu("File"))
-	//	{
-	//		if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-	//		if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
-	//		if (ImGui::MenuItem("Close", "Ctrl+W")) { my_tool_active = false; }
-	//		ImGui::EndMenu();
-	//	}
-	//	ImGui::EndMenuBar();
-	//}
-	//
-
-	//ImGui::Text("Hello, world %d", 123);
-	//ImGui::Button(" + ");
-	//ImGui::InputText("string", buf, IM_ARRAYSIZE(buf));
-	//
-
-	//ImGui::End();
+	ImGui::End();
 
 	ImGui::Render();
 

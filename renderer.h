@@ -73,6 +73,7 @@ private:
 	IDXGISwapChain*         m_SwapChain = nullptr;
 	ID3D11RenderTargetView* m_RenderTargetView = nullptr;
 	ID3D11DepthStencilView* m_DepthStencilView = nullptr;
+	
 
 	ID3D11DepthStencilView*		m_ShadowDepthStencilView = nullptr;
 	ID3D11ShaderResourceView*	m_ShadowDepthShaderResourceView = nullptr;
@@ -86,19 +87,23 @@ private:
 	ID3D11Buffer*			m_CameraBuffer = nullptr;
 	ID3D11Buffer*			m_ParameterBuffer = nullptr;
 
-	
 
 	ID3D11DepthStencilState* m_DepthStateEnable = nullptr;
 	ID3D11DepthStencilState* m_DepthStateDisable = nullptr;
 
+	ID3D11RenderTargetView*	  m_PPRenderTargetView = nullptr;
+	ID3D11ShaderResourceView* m_ShaderResourceView = nullptr;
 
 	void ShadowInit(DXGI_SWAP_CHAIN_DESC sd);
+	void RenderingTexture(DXGI_SWAP_CHAIN_DESC sd);
 
 public:
 	void Init();
 	void Uninit();
 	void Begin();
 	void End();
+
+	void BeginPP();
 
 	void SetDepthEnable(bool Enable);
 	void SetWorldViewProjection2D();
@@ -120,6 +125,7 @@ public:
 	void CreatePixelShader(ID3D11PixelShader** PixelShader, const char* FileName);
 
 	ID3D11ShaderResourceView* GetShadowDepthTexture() { return m_ShadowDepthShaderResourceView; }
+	ID3D11ShaderResourceView* GetRenderTexture() { return m_ShaderResourceView; }
 
 	void BeginDepth();
 
