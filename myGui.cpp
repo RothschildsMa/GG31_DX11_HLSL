@@ -8,6 +8,7 @@ float MyGui::m_Parameter = 0.0f;
 bool MyGui::m_Drawflag = false;
 bool MyGui::ShadowDepthView = false;
 bool MyGui::RenderTargetView = false;
+bool MyGui::HorrorTexture = false;
 
 static char buf[256] = "";
 
@@ -60,7 +61,7 @@ void MyGui::Draw()
 	
 	ImGui::Checkbox("ShadowDepthView", &ShadowDepthView);
 	ImGui::Checkbox("RenderTargetView", &RenderTargetView);
-
+	ImGui::Checkbox("HorrorTexture", &HorrorTexture);
 
 	ImGui::End();
 

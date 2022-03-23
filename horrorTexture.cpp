@@ -1,9 +1,10 @@
+
 #include "main.h"
 #include "renderer.h"
-#include "renderTexture.h"
+#include "horrorTexture.h"
 #include "myGui.h"
 
-void RenderTexture::Init()
+void HorrorTexture::Init()
 {
 	VERTEX_3D vertex[4];
 
@@ -12,17 +13,17 @@ void RenderTexture::Init()
 	vertex[0].Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	vertex[0].TexCoord = { 0.0f, 0.0f };
 
-	vertex[1].Position = { 500.0f, 0.0f, 0.0f };
+	vertex[1].Position = { SCREEN_WIDTH, 0.0f, 0.0f };
 	vertex[1].Normal = { 0.0f, 0.0f, 0.0f };
 	vertex[1].Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	vertex[1].TexCoord = { 1.0f, 0.0f };
 
-	vertex[2].Position = { 0.0f, 500.0f, 0.0f };
+	vertex[2].Position = { 0.0f, SCREEN_HEIGHT, 0.0f };
 	vertex[2].Normal = { 0.0f, 0.0f, 0.0f };
 	vertex[2].Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	vertex[2].TexCoord = { 0.0f, 1.0f };
 
-	vertex[3].Position = { 500.0f, 500.0f, 0.0f };
+	vertex[3].Position = { SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f };
 	vertex[3].Normal = { 0.0f, 0.0f, 0.0f };
 	vertex[3].Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	vertex[3].TexCoord = { 1.0f, 1.0f };
@@ -39,6 +40,8 @@ void RenderTexture::Init()
 
 	Renderer::GetInstance().GetDevice()->CreateBuffer(&bd, &sd, &m_VertexBuffer);
 
+	m_Parameter.y = 2.0f;
+
 	////テクスチャー読み込み
 	//D3DX11CreateShaderResourceViewFromFile(Renderer::GetInstance().GetDevice(),
 	//										"asset/texture/rockHp.png",
@@ -49,13 +52,13 @@ void RenderTexture::Init()
 
 	//assert(m_Texture);
 
-	Renderer::GetInstance().CreateVertexShader(&m_VertexShader, &m_VertexLayout, "unlitTextureVS.cso");
+	Renderer::GetInstance().CreateVertexShader(&m_VertexShader, &m_VertexLayout, "horrorVS.cso");
 
-	Renderer::GetInstance().CreatePixelShader(&m_PixelShader, "unlitTexturePS.cso");
+	Renderer::GetInstance().CreatePixelShader(&m_PixelShader, "horrorPS.cso");
 
 }
 
-void RenderTexture::Uninit()
+void HorrorTexture::Uninit()
 {
 	m_VertexBuffer->Release();
 	//m_Texture->Release();
@@ -65,14 +68,16 @@ void RenderTexture::Uninit()
 	m_PixelShader->Release();
 }
 
-void RenderTexture::Update()
+void HorrorTexture::Update()
 {
-
+	m_Parameter.y += 0.591f;
 }
 
-void RenderTexture::Draw()
+void HorrorTexture::Draw()
 {
-	if (!MyGui::RenderTargetView) return;
+	if (!MyGui::HorrorTexture) return;
+
+	Renderer::GetInstance().SetParameter(m_Parameter);
 
 	//入力レイアウト設定
 	Renderer::GetInstance().GetDeviceContext()->IASetInputLayout(m_VertexLayout);
@@ -89,10 +94,10 @@ void RenderTexture::Draw()
 	UINT offset = 0;
 	Renderer::GetInstance().GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
 
-	////テクスチャー設定
 	ID3D11ShaderResourceView* ppTexture = Renderer::GetInstance().GetRenderTexture();
 	Renderer::GetInstance().GetDeviceContext()->PSSetShaderResources(0, 1, &ppTexture);
 	
+
 	//プリミティブトポロジー設定
 	Renderer::GetInstance().GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 

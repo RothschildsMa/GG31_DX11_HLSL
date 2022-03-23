@@ -20,6 +20,7 @@ public:
 
 	static bool ShadowDepthView;
 	static bool RenderTargetView;
+	static bool HorrorTexture;
 
 	void Init();
 	void Uninit();

@@ -18,6 +18,7 @@
 #include "debugDraw.h"
 #include "sphere.h"
 #include "shaderSample.h"
+#include "horrorTexture.h"
 #include "meshField.h"
 #include "field.h"
 #include "camera.h"
@@ -121,9 +122,12 @@ void Manager::Draw()
 	LightManager::GetInstance().Draw();
 	//m_Scene->ShadowObjDraw();
 	DefaultCamera* camera = m_Scene->GetGameObject<DefaultCamera>(0);
+	TPSCamera* cm = m_Scene->GetGameObject<TPSCamera>(0);
 	MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	//MeshField* field = m_Scene->GetGameObject<MeshField>(1);
 	ShaderSample* sample = m_Scene->GetGameObject<ShaderSample>(1);
+	HorrorTexture* ht = m_Scene->GetGameObject<HorrorTexture>(2);
+
 	field->Draw();
 	sample->Draw();
 
@@ -131,12 +135,14 @@ void Manager::Draw()
 	camera->Draw();
 	field->Draw();
 	sample->Draw();
-	
+
+
 
 	Renderer::GetInstance().Begin();
 
 	m_Scene->Draw();
 
+	
 	//LightManager::GetInstance().Clear();
 
 	Fade::GetInstance().Draw();

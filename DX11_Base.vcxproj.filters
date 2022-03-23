@@ -207,6 +207,9 @@
     <ClInclude Include="renderTexture.h">
       <Filter>ソース ファイル\game_object</Filter>
     </ClInclude>
+    <ClInclude Include="horrorTexture.h">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -359,6 +362,9 @@
     <ClCompile Include="renderTexture.cpp">
       <Filter>ソース ファイル\game_object</Filter>
     </ClCompile>
+    <ClCompile Include="horrorTexture.cpp">
+      <Filter>ソース ファイル\game_object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="common.hlsl">
@@ -425,6 +431,12 @@
       <Filter>ソース ファイル\shader</Filter>
     </FxCompile>
     <FxCompile Include="depthShadowMappingPS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="horrorVS.hlsl">
+      <Filter>ソース ファイル\shader</Filter>
+    </FxCompile>
+    <FxCompile Include="horrorPS.hlsl">
       <Filter>ソース ファイル\shader</Filter>
     </FxCompile>
   </ItemGroup>
