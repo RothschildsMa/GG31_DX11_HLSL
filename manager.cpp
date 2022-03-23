@@ -132,7 +132,7 @@ void Manager::Draw()
 	sample->Draw();
 
 	Renderer::GetInstance().BeginPP();
-	camera->Draw();
+	cm->Draw();
 	field->Draw();
 	sample->Draw();
 

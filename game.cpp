@@ -24,6 +24,7 @@
 #include "shadowDepthView.h"
 #include "renderTexture.h"
 #include "horrorTexture.h"
+#include "bloomTexture.h"
 #include "shadow.h"
 #include "audio.h"
 #include "title.h"
@@ -69,6 +70,7 @@ void Game::Init()
 	AddGameObject<ShadowDepthView>(2);
 	AddGameObject<RenderTexture>(2);
 	AddGameObject<HorrorTexture>(2);
+	AddGameObject<BloomTexture>(2);
 
 	/*Player* p1 = AddGameObject<Airplane>(1);
 	p1->SetPosition({ 3.0f,1.0f,3.0f });

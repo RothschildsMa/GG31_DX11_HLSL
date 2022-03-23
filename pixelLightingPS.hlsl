@@ -25,7 +25,7 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
 	float specular = -dot(eyev, refv);	//鏡面反射の計算
 	specular = saturate(specular);		//値をサチュレート
 
-	specular = pow(specular, 30);		//30乗
+	specular = pow(specular, 5);		//30乗
 	outDiffuse.rgb += specular;
 
 

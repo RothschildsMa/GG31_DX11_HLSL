@@ -21,6 +21,7 @@ public:
 	static bool ShadowDepthView;
 	static bool RenderTargetView;
 	static bool HorrorTexture;
+	static bool BloomTexture;
 
 	void Init();
 	void Uninit();
