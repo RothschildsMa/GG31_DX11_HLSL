@@ -17,6 +17,10 @@
 static const char* buff = "";
 static bool g_Flag[ShaderTypeMax];
 static bool fieldFlag[2];
+static float g_Num = 1;  //fur用
+
+
+
 static std::string g_TypeName[] = {
 	"unLit",
 	"unLitTexture",
@@ -25,7 +29,7 @@ static std::string g_TypeName[] = {
 	"blinnPhong",
 	"rimLighting",
 	"SpotLight",
-	"depthShadow",
+	"fur",
 };
 
 static const int g_TypeCnt = ARRAYSIZE(g_TypeName);
@@ -51,6 +55,16 @@ void ShaderSample::Init()
 	m_Sphere->SetRadius(1.5f);
 	m_Sphere->SetColor({ 0.0f,10.0f,0.0f,1.0f });
 
+	// Furテクスチャ読み込み
+	D3DX11CreateShaderResourceViewFromFile(
+		Renderer::GetInstance().GetDevice(),
+		"asset/texture/fur.png",
+		NULL,
+		NULL,
+		&m_FurTexture,
+		NULL);
+	assert(m_FurTexture);
+
 
 	Renderer::GetInstance().CreateVertexShader(&m_VertexShader[0], &m_VertexLayout[0], "unlitVS.cso");
 
@@ -72,7 +86,6 @@ void ShaderSample::Init()
 
 	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[4], "blinnPhongPS.cso");
 
-
 	Renderer::GetInstance().CreateVertexShader(&m_VertexShader[5], &m_VertexLayout[5], "pixelLightingVS.cso");
 
 	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[5], "rimLightingPS.cso");
@@ -81,9 +94,9 @@ void ShaderSample::Init()
 
 	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[6], "pixelLightingSpotPS.cso");
 
-	Renderer::GetInstance().CreateVertexShader(&m_VertexShader[7], &m_VertexLayout[7], "depthShadowMappingVS.cso");
+	Renderer::GetInstance().CreateVertexShader(&m_VertexShader[7], &m_VertexLayout[7], "furVS.cso");
 
-	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[7], "depthShadowMappingPS.cso");
+	Renderer::GetInstance().CreatePixelShader(&m_PixelShader[7], "furPS.cso");
 
 	/*for (int i = 0; i < 6; i++)
 	{
@@ -110,6 +123,8 @@ void ShaderSample::Uninit()
 		if (m_PixelShader[i]) m_PixelShader[i]->Release();
 	}
 
+	m_FurTexture->Release();
+
 	//m_Sphere->SetDestroy();
 }
 
@@ -122,6 +137,17 @@ void ShaderSample::Update()
 
 	m_Sphere->SetPosition(m_Position);
 
+	//fur用
+	if (Input::GetKeyPress('Z'))
+	{
+		g_Num -= 0.5f;
+		if (g_Num < 1.0f) g_Num = 1.0f;
+	}
+	if (Input::GetKeyPress('X'))
+	{
+		g_Num += 0.5f;
+		if (g_Num > 500.0f) g_Num = 500.0f;
+	}
 
 	if (Input::GetKeyPress('A'))
 	{
@@ -304,11 +330,18 @@ void ShaderSample::Draw()
 
 	Renderer::GetInstance().SetWorldMatrix(m_WorldMtx);
 
-	//シャドウバッファをセット
-	ID3D11ShaderResourceView* shadowDepthTexture = Renderer::GetInstance().GetShadowDepthTexture();
-	Renderer::GetInstance().GetDeviceContext()->PSSetShaderResources(1, 1, &shadowDepthTexture);
+	// furテクスチャ
+	Renderer::GetInstance().GetDeviceContext()->PSSetShaderResources(1, 1, &m_FurTexture);
+	//ファー表現のために繰り返しモデルを描画する
+	for (int i = 0; i < (int)g_Num; i++)
+	{
+		XMFLOAT4 param;
+		param.x = i; //現在の描画回数をシェーダーのParameter.xへ渡す
+		Renderer::GetInstance().SetParameter(param);
+		m_Model->Draw();
+	}
 
-	m_Model->Draw();
+	//m_Model->Draw();
 
 
 }

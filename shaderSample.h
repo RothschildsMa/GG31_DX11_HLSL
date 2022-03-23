@@ -14,6 +14,7 @@ private:
 	ID3D11VertexShader*			m_VertexShader[ShaderTypeMax];
 	ID3D11PixelShader*			m_PixelShader[ShaderTypeMax];
 	ID3D11InputLayout*			m_VertexLayout[ShaderTypeMax];
+	ID3D11ShaderResourceView*	m_FurTexture; //Furテクスチャ
 
 	XMVECTOR m_Quaternion;
 	XMFLOAT4 m_Parameter;
